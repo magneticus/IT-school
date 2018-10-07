@@ -34,7 +34,9 @@ public class Main {
             }
         if(!stack.empty())result=false;
         System.out.println(result);
-        System.out.print("Error is "+(err_num+1)+" symbol");
+        if(!result) {
+            System.out.print("Error is " + (err_num + 1) + " symbol");
+        }
 
     }
 }
