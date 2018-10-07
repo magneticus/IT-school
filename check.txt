@@ -6,6 +6,7 @@ import java.util.Stack;
 public class Main {
     static Scanner scan = new Scanner(System.in);
     static String string;
+    static int err_num;
     static Stack <Character> stack = new Stack<Character>();
     static boolean result= true;
 
@@ -26,12 +27,14 @@ public class Main {
             if ((string.charAt(i) == ']') || (string.charAt(i) == ')')|| (string.charAt(i) == '}')) {
                 if (!check(stack.pop(), string.charAt(i))) {
                     result=false;
+                    err_num=i;
                     break;
                     }
                 }
             }
         if(!stack.empty())result=false;
-        System.out.print(result);
+        System.out.println(result);
+        System.out.print("Error is "+(err_num+1)+" symbol");
 
     }
 }
