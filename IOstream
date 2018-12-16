@@ -1,0 +1,36 @@
+package com.company;
+
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        File fl = new File("C:\\example\\example.txt");
+        try {
+            fl.createNewFile();
+            System.out.println("Файл успешно создан");
+        } catch (IOException e) {
+            System.out.println("Файл не создан");
+
+        }
+        System.out.println(fl.getName());
+        System.out.println(fl.getAbsolutePath());
+        FileInputStream fis = null;
+        FileOutputStream fos=null;
+        try {
+             fis = new FileInputStream("C:\\example\\example.txt");
+             fos = new FileOutputStream("C:\\test\\test.txt");
+            byte[] buffer = new byte[16];
+            while ((fis.read(buffer))!=-1){
+               fos.write(buffer);
+            }
+        } catch (Exception e) { }finally {
+            try {
+                fis.close();
+                fos.close();
+            } catch (IOException e) {
+                System.out.println("Файлы не закрылись!");
+            }
+        }
+    }
+}
