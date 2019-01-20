@@ -1,0 +1,49 @@
+package test.ru.samsung.itschool.test.myapplication;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.view.SurfaceHolder;
+
+public class DrawThread extends Thread{
+    private final Paint paint;
+    private final Paint paint2;
+    private SurfaceHolder holder;
+    public boolean running=true;
+    float x1 =0;
+    float y1 = 0;
+    float radiu1s=1;
+
+    public DrawThread(SurfaceHolder holder){
+        this.holder=holder;
+        paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLUE);
+        paint2 = new Paint();
+        paint2.setStyle(Paint.Style.FILL);
+        paint2.setColor(Color.YELLOW);
+
+    }
+
+    @Override
+    public void run(){
+        while (running){
+            Canvas canvas = holder.lockCanvas();
+            int width = canvas.getWidth();
+            int height = canvas.getHeight();
+            canvas.drawRect(0,0,width,height,paint);
+            canvas.drawCircle(x1,y1,radiu1s,paint2);
+            radiu1s+=5;
+                try {
+                    Thread.sleep(10);
+                }catch (Exception e) {
+
+                }
+            holder.unlockCanvasAndPost(canvas);
+        }
+    }
+   public void setXandY(float x,float y){
+        x1=x;
+        y1=y;
+   }
+}
