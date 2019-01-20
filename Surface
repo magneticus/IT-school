@@ -1,0 +1,41 @@
+package test.ru.samsung.itschool.test.myapplication;
+
+import android.content.Context;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+
+    private DrawThread drawThread;
+
+    public TestSurfaceView(Context context) {
+        super(context);
+        getHolder().addCallback(this);
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        drawThread = new DrawThread(holder);
+        drawThread.start();
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        drawThread.running=false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float y =event.getY();
+        float x = event.getX();
+        drawThread.setXandY(x,y);
+        drawThread.radiu1s=1;
+        return super.onTouchEvent(event);
+    }
+}
