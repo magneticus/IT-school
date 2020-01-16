@@ -1,0 +1,27 @@
+var i,j,temp : integer;
+const n = 3;
+var a: array[0..n*2-1] of integer ;
+var b: array[0..n-1] of integer ;
+begin
+	writeln('a:');
+	for	i:=0 to n-1 do
+		readln(a[i]);
+	writeln('b:');
+	for	i:=0 to n-1 do
+		readln(b[i]);
+    for	i:=n to n*2-1 do
+		a[i]:=b[i-n];
+	for	i:=0 to n-1 do
+		for	j:=1 to n-1 do
+			begin
+			if a[j] > a[j+1] then
+				begin
+				temp:=a[j+1];
+				a[j+1]:=a[j];
+				a[j]:=temp;
+				end; 
+			end;
+	for	i:=0 to n*2-1 do
+		write(a[i]);
+	readln();
+end.
